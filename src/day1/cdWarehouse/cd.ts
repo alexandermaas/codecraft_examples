@@ -1,9 +1,9 @@
 import {IPaymentProvider} from "./IPaymentProvider";
 
 export class CD {
-    static buy(cds: CD[], paymentProvider1: IPaymentProvider) {
+    static buy(cds: CD[], paymentProvider: IPaymentProvider) {
         if(cds.length>0){
-            if(paymentProvider1.performPayment()){
+            if(paymentProvider.performPayment()){
                 return true
             }
         }
