@@ -1,5 +1,5 @@
-import { MarsRover } from './marsRover';
-import { Heading } from './heading';
+import {MarsRover} from './marsRover';
+import {Heading} from './heading';
 
 describe('MarsRover', () => {
     describe('currentLocation', () => {
@@ -77,4 +77,11 @@ describe('MarsRover', () => {
             });
         });
     });
+    describe('multiple instructions',() => {
+        it(`should move from location [2,3] to [2,5] with heading 'North' and commands 'FF'`, () => {
+            const marsRover: MarsRover = new MarsRover([2, 3], Heading.North);
+            marsRover.command("FF")
+            expect(marsRover.location).toEqual([2,5])
+        });
+    })
 });

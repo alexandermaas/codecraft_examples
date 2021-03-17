@@ -3,18 +3,20 @@ import {Heading} from './heading';
 export class MarsRover {
     constructor(public location: number[], public heading: Heading) {}
 
-    command(command: string) {
-        if (command == 'L') {
-            this.turn(1);
-        }
-        else if(command == "R"){
-            this.turn(-1)
-        }
-        else if (command == 'F') {
-            this.move(1);
-        } else {
-            this.move(-1);
-        }
+    command(commandString: string) {
+        commandString.split("").forEach((command) => {
+            if (command == 'L') {
+                this.turn(1);
+            }
+            else if(command == "R"){
+                this.turn(-1)
+            }
+            else if (command == 'F') {
+                this.move(1);
+            } else {
+                this.move(-1);
+            }
+        })
     }
 
     private turn(increment:number) {
@@ -24,19 +26,15 @@ export class MarsRover {
     }
 
     private move(increment: number) {
-        switch (this.heading) {
-            case Heading.West:
-                this.location[0] -= increment;
-                break;
-            case Heading.East:
-                this.location[0] += increment;
-                break;
-            case Heading.North:
-                this.location[1] += increment;
-                break;
-            case Heading.South:
-                this.location[1] -= increment;
-                break;
-        }
+        const moveDirection={"West":[-increment,0],
+            "East":[increment,0],
+            "North":[0,increment],
+            "South":[0,-increment],
+        };
+
+        this.location = [
+            this.location[0]+moveDirection[this.heading][0],
+            this.location[1]+moveDirection[this.heading][1]
+        ]
     }
 }
