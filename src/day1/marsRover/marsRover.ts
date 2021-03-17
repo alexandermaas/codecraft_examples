@@ -4,37 +4,23 @@ export class MarsRover {
     constructor(public location: number[], public heading: Heading) {}
 
     command(command: string) {
-        let increment;
         if (command == 'L') {
-            this.turnLeft();
+            this.turn(1);
         }
         else if(command == "R"){
-            if(this.heading == Heading.East){
-                this.heading = Heading.South
-            }
-            else if(this.heading == Heading.South){
-                this.heading = Heading.West
-            }
-            else if(this.heading == Heading.West){
-                this.heading = Heading.North
-            }
-            else if(this.heading == Heading.North){
-                this.heading = Heading.East
-            }
+            this.turn(-1)
         }
         else if (command == 'F') {
-            increment = 1;
-            this.move(increment);
+            this.move(1);
         } else {
-            increment = -1;
-            this.move(increment);
+            this.move(-1);
         }
     }
 
-    private turnLeft() {
+    private turn(increment:number) {
         const directions = [Heading.North, Heading.East, Heading.South, Heading.West];
         const directionIndex = directions.indexOf(this.heading);
-        this.heading = directions[(directionIndex - 1 + directions.length) % directions.length];
+        this.heading = directions[(directionIndex - increment + directions.length) % directions.length];
     }
 
     private move(increment: number) {
