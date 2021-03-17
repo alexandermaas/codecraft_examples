@@ -36,7 +36,7 @@ describe('MarsRover', () => {
         ].forEach(({ expectedLocation, heading, initialLocation }) => {
             it(`should move from location ${initialLocation} to location ${expectedLocation} if heading is '${heading}'`, () => {
                 const marsRover: MarsRover = new MarsRover(initialLocation, heading);
-                marsRover.command('F');
+                marsRover.execute('F');
                 expect(marsRover.location).toEqual(expectedLocation);
             });
         });
@@ -54,7 +54,7 @@ describe('MarsRover', () => {
         ].forEach(({ expectedLocation, heading, initialLocation }) => {
             it(`should move from location ${initialLocation} to location ${expectedLocation} if heading is '${heading}'`, () => {
                 const marsRover: MarsRover = new MarsRover(initialLocation, heading);
-                marsRover.command('B');
+                marsRover.execute('B');
                 expect(marsRover.location).toEqual(expectedLocation);
             });
         });
@@ -72,7 +72,7 @@ describe('MarsRover', () => {
         ].forEach(({ expectedHeading, initialHeading, command }) => {
             it(`should move from '${initialHeading}' to '${expectedHeading}'`, () => {
                 const marsRover: MarsRover = new MarsRover([0, 0], initialHeading);
-                marsRover.command(command);
+                marsRover.execute(command);
                 expect(marsRover.heading).toEqual(expectedHeading);
             });
         });
@@ -80,7 +80,7 @@ describe('MarsRover', () => {
     describe('multiple instructions',() => {
         it(`should move from location [2,3] to [2,5] with heading 'North' and commands 'FF'`, () => {
             const marsRover: MarsRover = new MarsRover([2, 3], Heading.North);
-            marsRover.command("FF")
+            marsRover.execute("FF")
             expect(marsRover.location).toEqual([2,5])
         });
     })
