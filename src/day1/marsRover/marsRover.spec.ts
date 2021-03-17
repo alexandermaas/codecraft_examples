@@ -23,38 +23,28 @@ describe('MarsRover', () => {
                 });
             });
     });
-    describe('move forward', () => {
+    describe('move', () => {
         [
-            { initialLocation: [5, 6], expectedLocation: [4, 6], heading: Heading.West },
-            { initialLocation: [2, 3], expectedLocation: [1, 3], heading: Heading.West },
-            { initialLocation: [5, 6], expectedLocation: [6, 6], heading: Heading.East },
-            { initialLocation: [2, 3], expectedLocation: [3, 3], heading: Heading.East },
-            { initialLocation: [5, 6], expectedLocation: [5, 7], heading: Heading.North },
-            { initialLocation: [2, 3], expectedLocation: [2, 4], heading: Heading.North },
-            { initialLocation: [5, 6], expectedLocation: [5, 5], heading: Heading.South },
-            { initialLocation: [2, 3], expectedLocation: [2, 2], heading: Heading.South },
-        ].forEach(({ expectedLocation, heading, initialLocation }) => {
+            { initialLocation: [5, 6], expectedLocation: [4, 6], heading: Heading.West, command: "F" },
+            { initialLocation: [2, 3], expectedLocation: [1, 3], heading: Heading.West, command: "F" },
+            { initialLocation: [5, 6], expectedLocation: [6, 6], heading: Heading.East, command: "F" },
+            { initialLocation: [2, 3], expectedLocation: [3, 3], heading: Heading.East, command: "F" },
+            { initialLocation: [5, 6], expectedLocation: [5, 7], heading: Heading.North, command: "F" },
+            { initialLocation: [2, 3], expectedLocation: [2, 4], heading: Heading.North, command: "F" },
+            { initialLocation: [5, 6], expectedLocation: [5, 5], heading: Heading.South, command: "F" },
+            { initialLocation: [2, 3], expectedLocation: [2, 2], heading: Heading.South, command: "F" },
+            { initialLocation: [5, 6], expectedLocation: [6, 6], heading: Heading.West, command: "B"},
+            { initialLocation: [2, 3], expectedLocation: [3, 3], heading: Heading.West, command: "B"},
+            { initialLocation: [5, 6], expectedLocation: [4, 6], heading: Heading.East, command: "B"},
+            { initialLocation: [2, 3], expectedLocation: [1, 3], heading: Heading.East, command: "B"},
+            { initialLocation: [5, 6], expectedLocation: [5, 5], heading: Heading.North, command: "B"},
+            { initialLocation: [2, 3], expectedLocation: [2, 2], heading: Heading.North, command: "B"},
+            { initialLocation: [5, 6], expectedLocation: [5, 7], heading: Heading.South, command: "B"},
+            { initialLocation: [2, 3], expectedLocation: [2, 4], heading: Heading.South, command: "B"},
+        ].forEach(({ expectedLocation, heading, initialLocation , command}) => {
             it(`should move from location ${initialLocation} to location ${expectedLocation} if heading is '${heading}'`, () => {
                 const marsRover: MarsRover = new MarsRover(initialLocation, heading);
-                marsRover.execute('F');
-                expect(marsRover.location).toEqual(expectedLocation);
-            });
-        });
-    });
-    describe('move backward', () => {
-        [
-            { initialLocation: [5, 6], expectedLocation: [6, 6], heading: Heading.West },
-            { initialLocation: [2, 3], expectedLocation: [3, 3], heading: Heading.West },
-            { initialLocation: [5, 6], expectedLocation: [4, 6], heading: Heading.East },
-            { initialLocation: [2, 3], expectedLocation: [1, 3], heading: Heading.East },
-            { initialLocation: [5, 6], expectedLocation: [5, 5], heading: Heading.North },
-            { initialLocation: [2, 3], expectedLocation: [2, 2], heading: Heading.North },
-            { initialLocation: [5, 6], expectedLocation: [5, 7], heading: Heading.South },
-            { initialLocation: [2, 3], expectedLocation: [2, 4], heading: Heading.South },
-        ].forEach(({ expectedLocation, heading, initialLocation }) => {
-            it(`should move from location ${initialLocation} to location ${expectedLocation} if heading is '${heading}'`, () => {
-                const marsRover: MarsRover = new MarsRover(initialLocation, heading);
-                marsRover.execute('B');
+                marsRover.execute(command);
                 expect(marsRover.location).toEqual(expectedLocation);
             });
         });
