@@ -18,7 +18,7 @@ The following actions are identified.
 - [x] Payment successful
 - [x] Payment declined
 - [x] Stock insufficient
-- [ ] Notify charts that X copies of CD Y have been sold
+- [x] Notify charts that X copies of CD Y have been sold
 
 ## Search:
 - [x] Match with title and artist

@@ -1,3 +1,3 @@
-export interface PaymentProvider {
+export interface IPaymentProvider {
     processPayment(value: number): boolean
 }
