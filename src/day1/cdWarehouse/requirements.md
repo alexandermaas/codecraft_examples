@@ -11,8 +11,8 @@
 The following actions are identified.
 
 ## Price
-- [ ] We need to check if it is in Top 100
-- [ ] If so beat competitor price by 1Eur.
+- [x] We need to check if it is in Top 100
+- [x] If so beat competitor price by 1Eur.
 
 ## Buy:
 - [x] Payment successful
