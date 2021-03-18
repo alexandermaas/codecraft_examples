@@ -1,12 +1,15 @@
-import {IPaymentProvider} from "./IPaymentProvider";
+import {PaymentProvider} from "./paymentProvider";
 
 export class CD {
-    static buy(cds: CD[], paymentProvider: IPaymentProvider) {
-        if(cds.length>0){
-            if(paymentProvider.performPayment()){
-                return true
-            }
+    constructor(private price: number, public stock: number, public artist: string, public title: string) {
+    }
+
+    buy(paymentProvider: PaymentProvider): number {
+        if (this.stock === 0) {
+            return this.stock;
         }
-        return false;
+        if (paymentProvider.processPayment(this.price)) {
+            return this.stock--;
+        }
     }
 }
