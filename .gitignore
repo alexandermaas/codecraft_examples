@@ -1,3 +1,5 @@
 .idea
 node_modules
 codemanship_codecraft.pdf
+# stryker temp files
+.stryker-tmp
