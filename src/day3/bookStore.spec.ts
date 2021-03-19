@@ -2,7 +2,8 @@ import {Book} from "./book";
 import {Library} from "./library";
 
 const maxHavelaarBook = new Book("Max Havelaar", "Multatuli")
-const harryPotterBook = new Book("Harry Potter: Chamber of secrets", "J.K. Rowling")
+const harryPotterBook1 = new Book("Harry Potter: Philosopher stone", "J.K. Rowling")
+const harryPotterBook2 = new Book("Harry Potter: Chamber of secrets", "J.K. Rowling")
 
 describe('Search cheapest price for book title', () => {
     describe('Book was found', () => {
@@ -12,9 +13,9 @@ describe('Search cheapest price for book title', () => {
             expect(book).toEqual(maxHavelaarBook)
         });
         it('should return single book in case there is are multiple items in the library', () => {
-            const library = new Library([maxHavelaarBook, harryPotterBook]);
-            const book = library.getBook(harryPotterBook.title, harryPotterBook.author);
-            expect(book).toEqual(harryPotterBook)
+            const library = new Library([maxHavelaarBook, harryPotterBook2]);
+            const book = library.getBook(harryPotterBook2.title, harryPotterBook2.author);
+            expect(book).toEqual(harryPotterBook2)
         });
     })
     describe('Book was not found',() => {
@@ -24,7 +25,19 @@ describe('Search cheapest price for book title', () => {
         });
         it('should throw error in case book does not exist in library', () => {
             const library: Library = new Library([maxHavelaarBook]);
-            expect(()=>{library.getBook(harryPotterBook.title, harryPotterBook.author)}).toThrowError("The book you are looking for ('Harry Potter: Chamber of secrets' by 'J.K. Rowling') does not exist in our database")
+            expect(()=>{library.getBook(harryPotterBook2.title, harryPotterBook2.author)}).toThrowError("The book you are looking for ('Harry Potter: Chamber of secrets' by 'J.K. Rowling') does not exist in our database")
+        });
+    })
+    describe('Multiple books same author',() => {
+        it('should return all books of the author in the library', () => {
+            let library: Library = new Library([maxHavelaarBook, harryPotterBook1, harryPotterBook2]);
+            const books = library.getBooks(harryPotterBook1.author);
+            expect(books).toEqual([harryPotterBook1, harryPotterBook2])
+        });
+        it('should return the only book of the author in the library', () => {
+            let library: Library = new Library([maxHavelaarBook, harryPotterBook1, harryPotterBook2]);
+            const books = library.getBooks(maxHavelaarBook.author);
+            expect(books).toEqual([maxHavelaarBook])
         });
     })
 })
